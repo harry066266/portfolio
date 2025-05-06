@@ -26,6 +26,36 @@ const config: Config = {
         serif: "var(--font-serif)",
       },
     },
+    animation: {
+      // 自定义动画名称与时长设置
+      "ping-large": "ping-large 1s ease-in-out infinite",
+      spin: "spin 1s linear infinite",
+      "move-left": "move-left 1s linear infinite",
+      "move-right": "move-right 1s linear infinite",
+    },
+    keyframes: {
+      // 自定义动画的关键帧
+      "ping-large": {
+        "75%, 100%": {
+          transform: "scale(3)", // 元素放大
+          opacity: "0", // 透明度变为 0
+        },
+      },
+      spin: {
+        from: { transform: "rotate(0deg)" },
+        to: { transform: "rotate(360deg)" },
+      },
+      "move-left": {
+        "0%": { transform: "translateX(0)" },
+
+        "100%": { transform: "translateX(-50%)" },
+      },
+      "move-right": {
+        "0%": { transform: "translateX(-50%)" },
+
+        "100%": { transform: "translateX(0)" },
+      },
+    },
   },
   plugins: [],
 };

@@ -10,7 +10,7 @@ const calistoga = Calistoga({
 });
 export const metadata: Metadata = {
   title: "My Portfolio",
-  description: "Created with the help of Frontend Tribe",
+  description: "Harry's Portfolio",
 };
 
 export default function RootLayout({
@@ -24,7 +24,7 @@ export default function RootLayout({
         className={twMerge(
           inter.variable,
           calistoga.variable,
-          "bg-gray-900 text-white antialiased font-sans"
+          "bg-gray-900 text-white antialiased font-sans "
         )}
       >
         {children}
