@@ -117,7 +117,7 @@ export const HeroSection = () => {
         </div>
 
         <div className="flex justify-center items-center">
-          <a href="/docs/resume.pdf" download={"Resume"}>
+          <a href="/docs/Resume.pdf" download={"Resume"}>
             <button className="bg-emerald-500 text-gray-950 h-12 w-full md:w-auto px-8 rounded-xl font-semibold inline-flex items-center justify-center gap-2 mt-4">
               <span> View My Resume</span>
               <span>😊</span>
