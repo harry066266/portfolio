@@ -8,7 +8,7 @@ export async function sendEmail(formData: FormData) {
 
   await resend.emails.send({
     from: "Acme <onboarding@resend.dev>",
-    to: "wangwangliang990626@gmail.com",
+    to: "haoyuanhe97@gmail.com",
     subject: "Contact Form Submission",
     text: `Email: ${email}\n\nMessage: ${message}`,
   });
