@@ -5,14 +5,46 @@ import grainImage from "@/assets/images/grain.jpg";
 import { HeroOrbit } from "@/components/HeroOrbit";
 import StarIcon from "@/assets/icons/star.svg";
 import SparkleIcon from "@/assets/icons/sparkle.svg";
-import { sendEmail } from "./sendEmail";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 const ContactForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
 
+    if (formRef.current) {
+      const formData = new FormData(formRef.current);
+      const data = {
+        email: formData.get("email"),
+        message: formData.get("message"),
+      };
+
+      try {
+        const response = await fetch("/api/sendEmail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          toast.success("Email sent successfully");
+          formRef.current.reset();
+          setTimeout(() => {
+            router.push("/"); // 跳转到主页
+          }, 2000); // 2秒后跳转
+        } else {
+          toast.error("Failed to send email");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        toast.error("An error occurred");
+      }
+    }
+  };
   return (
     <div className="py-32 md:py-48 lg:py-60 relative z-0 h-screen overflow-hidden">
       <Toaster />
@@ -81,21 +113,7 @@ const ContactForm = () => {
             Contact Me
           </h2>
 
-          <form
-            ref={formRef}
-            onSubmit={async (event) => {
-              event.preventDefault(); // 防止默认提交
-              const formData = new FormData(formRef.current!);
-              await sendEmail(formData);
-              toast.success("Email sent successfully");
-              if (formRef.current) {
-                formRef.current.reset(); // 清空表单
-              }
-              setTimeout(() => {
-                router.push("/"); // 跳转到主页
-              }, 2000); // 3000 毫秒 = 3 秒
-            }}
-          >
+          <form ref={formRef} onSubmit={handleSubmit}>
             <div className="mb-4">
               <label
                 className="block text-white text-sm font-semibold mb-2"
